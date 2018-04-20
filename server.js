@@ -7,7 +7,7 @@ var app = express();
 var db = require("./models");
 
 // set EJS as our view engine. This allows us to make dynamic pages.
-
+app.set('port', process.env.PORT || 3000)
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
@@ -56,6 +56,7 @@ app.get('/api/albums', function (req, res) {
   res.send(albums)
   });
 });
+
 // app.get('/api/albums/:id', function (req, res) {
 //   let id = req.params.id;
 //   res.send({id})
@@ -78,4 +79,7 @@ app.get('/api/albums', function (req, res) {
  **********/
 
 // listen on port 3000
-app.listen(process.env.PORT || 3000);
+
+  app.listen(app.get('port'), () => {
+    console.log(`✅ PORT: ${app.get('port')} 🌟`)
+  })
