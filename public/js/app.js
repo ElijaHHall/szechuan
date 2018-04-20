@@ -11,6 +11,31 @@
  *
  */
 
+
+
 $(document).ready(function() {
   console.log('app.js loaded!');
+
+ //  var $albumsList;
+ //  var newAlbums = [];
+	// $albumsList = $('#here');
+
+  // $.ajax({
+  // 	method: 'GET',
+  // 	url: '/api/albums',
+  // 	success: albumSuccess,
+  // 	error: console.log('Did not work!')
+  // });
+
+ //  function render () {
+ //  	$albumsList.empty();
+ //  }
+
+ //  function albumSuccess(json) {
+ //  	newAlbums = json;
+ //  	render();
+ //  }
+
+
 });
+

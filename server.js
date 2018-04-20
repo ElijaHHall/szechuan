@@ -4,8 +4,11 @@
 var express = require('express');
 // generate a new express app and call it 'app'
 var app = express();
+var db = require("./models");
 
 // set EJS as our view engine. This allows us to make dynamic pages.
+
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 // serve static files from public folder
@@ -25,34 +28,6 @@ First get your routes hooked up and the ejS looking the way you want. When you a
 ready to proceed with hooking up the database, go to ./models/album to create a schema.
 Then, take a look into the seed.js file to populate some starter data.
 */
-var albums = [{
-  _id: 132,
-  artistName: 'Nine Inch Nails',
-  name: 'The Downward Spiral',
-  releaseDate: '1994, March 8',
-  genres: [ 'industrial', 'industrial metal' ]
-},
-{
-  _id: 133,
-  artistName: 'Metallica',
-  name: 'Metallica',
-  releaseDate: '1991, August 12',
-  genres: [ 'heavy metal' ]
-},
-{
-  _id: 134,
-  artistName: 'The Prodigy',
-  name: 'Music for the Jilted Generation',
-  releaseDate: '1994, July 4',
-  genres: [ 'electronica', 'breakbeat hardcore', 'rave', 'jungle' ]
-},
-{
-  _id: 135,
-  artistName: 'Johnny Cash',
-  name: 'Unchained',
-  releaseDate: '1996, November 5',
-  genres: [ 'country', 'rock' ]
-}];
 
 
 /**********
@@ -63,14 +38,28 @@ var albums = [{
  * HTML Endpoints: This means we are expecting an HTML or EJS page to be rendered
  */
 
+
+
 app.get('/', function homepage (req, res) {
   // This albums variable is the array of objects defined above.
   // TODO: Eventually, this should be replaced with a find() call to your database!
-  res.render('index', { albums: albums });
+  db.Album.find(function(err, dataAlbum) {
+    res.render('index', { albums: dataAlbum});
+  });
 });
 
 // TODO: GET ROUTE for single album (Route has an id in the url. e.g., /:id that can be accessed
 // on the request object with req.params.id).
+
+app.get('/api/albums', function (req, res) {
+  db.Album.find(function(err, albums){
+  res.send(albums)
+  });
+});
+// app.get('/api/albums/:id', function (req, res) {
+//   let id = req.params.id;
+//   res.send({id})
+// });
 
 // TODO: POST ROUTE (NOTE: You can submit a post request directly from an HTML form tag
 // using the method and action attributes - no need for AJAX!)
