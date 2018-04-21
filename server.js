@@ -57,14 +57,13 @@ app.get('/api/albums', function (req, res) {
   db.Album.find(function(err, albums){
   res.send(albums)
   });
-// });
+});
 
-
-// app.post('/api/albums', function (req, res) {
-//   db.Album.create(req.body).then(function(postAlbum){
-//     res.send(postAlbum);
-//   })
-
+// create is working!
+app.post('/api/albums', function (req, res) {
+  db.Album.create(req.body).then(function(postAlbum){
+    res.send(postAlbum);
+  })
 });
 // TODO: POST ROUTE (NOTE: You can submit a post request directly from an HTML form tag
 // using the method and action attributes - no need for AJAX!)
