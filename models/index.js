@@ -8,3 +8,4 @@ if (process.env.NODE_ENV == "production") {
 }
 
 module.exports.Album = require("./album.js");
+module.exports.Song = require("./songs.js");

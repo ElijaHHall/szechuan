@@ -34,7 +34,7 @@ $(document).ready(function() {
  function newAlbumSuccess(json) {
     $('.form-group input').val('');
     allAlbums.push(json);
-    window.location.href='/';
+    window.location.reload();
   }
 
 });
