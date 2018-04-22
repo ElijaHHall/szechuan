@@ -5,7 +5,7 @@
   color: #EEE;
 }
 .jumbotron .container {
-  height: 350px;
+  height: 320px;
 }
 
 .inline-header {
@@ -14,3 +14,19 @@
   margin-right: 12px;
 }
 
+div {
+  font-family: 'Shrikhand', cursive;
+
+}
+
+section {
+	float: left;
+}
+
+h2 {
+	font-size: 40px;
+}
+
+label {
+	font-size: 20px;
+}
