@@ -5,6 +5,7 @@ var express = require('express');
 // generate a new express app and call it 'app'
 var app = express();
 var db = require("./models");
+var bodyParser = require('body-parser');
 
 // set EJS as our view engine. This allows us to make dynamic pages.
 app.set('port', process.env.PORT || 3000)
@@ -13,6 +14,7 @@ app.set('view engine', 'ejs');
 
 // serve static files from public folder
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: true}));
 
 /************
  * DATABASE *
@@ -57,11 +59,12 @@ app.get('/api/albums', function (req, res) {
   });
 });
 
-// app.get('/api/albums/:id', function (req, res) {
-//   let id = req.params.id;
-//   res.send({id})
-// });
-
+// create is working!
+app.post('/api/albums', function (req, res) {
+  db.Album.create(req.body).then(function(postAlbum){
+    res.send(postAlbum);
+  })
+});
 // TODO: POST ROUTE (NOTE: You can submit a post request directly from an HTML form tag
 // using the method and action attributes - no need for AJAX!)
 

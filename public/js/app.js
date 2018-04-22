@@ -15,27 +15,48 @@
 
 $(document).ready(function() {
   console.log('app.js loaded!');
+  var $albumsList;
+  var allAlbums = [];
 
- //  var $albumsList;
- //  var newAlbums = [];
-	// $albumsList = $('#here');
+  
 
-  // $.ajax({
-  // 	method: 'GET',
-  // 	url: '/api/albums',
-  // 	success: albumSuccess,
-  // 	error: console.log('Did not work!')
-  // });
+  $('.form-horizontal').on("submit", function(e){
+  	e.preventDefault();
+	  $.ajax({
+	  	method: 'POST',
+	  	url: '/api/albums',
+	  	data: $(this).serialize(),
+      success: newAlbumSuccess,
+      error: console.log('nope!')
+	   });
+	  });
 
- //  function render () {
- //  	$albumsList.empty();
- //  }
-
- //  function albumSuccess(json) {
- //  	newAlbums = json;
- //  	render();
- //  }
-
+ function newAlbumSuccess(json) {
+    $('.form-group input').val('');
+    allAlbums.push(json);
+    window.location.reload();
+  }
 
 });
+
+
+  // function getAlbumHtml(album) {
+  // 	return  `<hr>
+  //         <p>
+  //           <b>${album.name}</b>
+  //           by ${album.artistName}
+  //           <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id=${album._id}>Delete</button>
+  //         </p>`;
+  // }
+
+  // function getAllAlbumsHtml(albums) {
+  // 	return albums.map(getAlbumHtml).join('');
+  // }
+
+  // function render() {
+  // 	$albumsList.empty();
+  // 	var albumsHTML = getAllAlbumsHtml(allAlbums);
+  // 	$albumsList.append(albumsHTML);
+  // }
+
 
